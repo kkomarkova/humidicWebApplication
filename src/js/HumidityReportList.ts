@@ -35,6 +35,8 @@ export class HumidityReportList{
                     new HumidityReport(31, new Date(2020, 11, 23, 10, 30, 0, 0)),
                     new HumidityReport(29, new Date(2020, 11, 23, 10, 45, 0, 0)),
                     new HumidityReport(36, new Date(2020, 11, 23, 11, 0, 0, 0)),
+
+                    new HumidityReport(100, new Date()),
                 )
         //    });
 
