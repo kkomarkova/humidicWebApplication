@@ -8,6 +8,6 @@ export class HumidityReport{
     }
 
     DebugReport():string{
-        return "The humidity at " + this.time.toLocaleString() + "was " + this.humidity + "%." 
+        return "The humidity at " + this.time.toLocaleString() + " was " + this.humidity + "%." 
     }
 }
