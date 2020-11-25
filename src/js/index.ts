@@ -1,7 +1,11 @@
 import { HumidityReportList } from "./HumidityReportList";
 import { Delay } from "./Delay";
+import { WeatherReport } from "./WeatherReport";
 
 let humidityReportList = new HumidityReportList();
+let weatherReport = new WeatherReport();
+
+console.log(weatherReport.GetWeatherData());
 
 //humidityReportList.GetAllReports();
 
