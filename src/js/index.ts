@@ -5,7 +5,8 @@ import { WeatherReport } from "./WeatherReport";
 let humidityReportList = new HumidityReportList();
 let weatherReport = new WeatherReport();
 
-console.log(weatherReport.GetWeatherData());
+//console.log(weatherReport.GetWeatherData());
+//weatherReport.GetWeatherData();
 
 //humidityReportList.GetAllReports();
 
@@ -13,6 +14,7 @@ console.log(weatherReport.GetWeatherData());
     while(true){
         console.log("Activated at " + new Date().getMinutes());
         humidityReportList.UpdateMainPageHumidity();
+        weatherReport.GetWeatherData();
 
         let currentMinute:number = new Date().getMinutes();
         if(currentMinute % 15 == 0){
