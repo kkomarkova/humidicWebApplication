@@ -22,6 +22,7 @@ export class WeatherReport{
     //}
 
     GetWeatherData():void{
+        let mainPageThirdPartyLastUpdated:HTMLElement = document.getElementById("thirdPartyLastUpdated");
         axios.get(this.url)
         .then(function(response: AxiosResponse<WeatherObject>):void{
             console.log(response);
@@ -30,11 +31,13 @@ export class WeatherReport{
             let mainPageOutsideTemperatureValue:HTMLElement = document.getElementById("outsideTemperatureValue");
             let weatherReport:WeatherObject = response.data; 
 
-            mainPageOutsideHumidityValue.innerText = weatherReport.main.humidity.toString();
-            mainPageOutsideTemperatureValue.innerText = weatherReport.main.temp.toString();
+            mainPageOutsideHumidityValue.innerText = weatherReport.main.humidity.toString() + "%";
+            mainPageOutsideTemperatureValue.innerText = weatherReport.main.temp.toString() + "°C";
+            mainPageThirdPartyLastUpdated.innerText = "Last updated: " + new Date().getHours() + ":" + new Date().getMinutes();
         })
         .catch(function(error: AxiosError):void{
             console.log(error);
+            mainPageThirdPartyLastUpdated.innerText = "Last update was unsuccesful.";
         })
     }
 }
