@@ -92,9 +92,45 @@
                 </div>
             </div>
             <div class="col-4">
-                <button class="add-user">
+                <button class="add-user" data-toggle="modal" data-target="#exampleModal">   
                     <i class="uil uil-user-plus"></i>
                 </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Add new preference</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                  <label for="preference-name" class="col-form-label">Preference name:</label>
+                                  <input type="text" class="form-control" id="preference-name">
+                                </div>
+                                <div class="form-group">
+                                  <label for="minhumidity" class="col-form-label">Minimum humidity level:</label>
+                                  <textarea class="form-control" id="minhumidity"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="maxhumidity" class="col-form-label">Maximum humidity level:</label>
+                                    <input type="text" class="form-control" id="maxhumidity">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="updateinterval" class="col-form-label">The update interval:</label>
+                                    <input type="text" class="form-control" id="updateinterval">
+                                  </div>
+                              </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
             </div>
         </div>
         <div class="row mt-5">
@@ -105,14 +141,14 @@
                     <li><i class="uil uil-pen"></i></li>
                 </ul>
             </div>
-            <div class="col-4">
+            <!-- <div class="col-4">
                 <h2>Alert settings</h2>
                 <ul class="list-block">
                     <li>Visual</li>
                     <li>Auditory</li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         
         <button class="save">Save</button>
 
