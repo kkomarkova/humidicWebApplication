@@ -1,13 +1,13 @@
 export class HumidityReport{
-    humidity:number;
-    time:Date;
+    level:number;
+    date:Date;
 
     constructor(humidity:number, time:Date){
-        this.humidity = humidity;
-        this.time = time;
+        this.level = humidity;
+        this.date = time;
     }
 
-    DebugReport():string{
-        return "The humidity at " + this.time.toLocaleString() + " was " + this.humidity + "%." 
+    public DebugReport():string{
+        return "The humidity at " + this.date.toLocaleString() + " was " + this.level + "%." 
     }
 }

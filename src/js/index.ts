@@ -23,6 +23,7 @@ let weatherReport = new WeatherReport();
             humidityReportList.UpdateMainPageHumidity();
         }
 
+        console.log("Now sleeping for a minute.")
         //One minute
         await Delay(60000);
     }
