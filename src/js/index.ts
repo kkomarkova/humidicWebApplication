@@ -10,7 +10,8 @@ let weatherReport = new WeatherReport();
 
 //humidityReportList.GetAllReports();
 
-(async () => { 
+(async () => {
+    await humidityReportList.GetAllReports(); 
     while(true){
         console.log("Activated at " + new Date().getMinutes());
         humidityReportList.UpdateMainPageHumidity();
