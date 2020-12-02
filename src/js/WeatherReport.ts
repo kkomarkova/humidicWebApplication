@@ -29,10 +29,12 @@ export class WeatherReport{
             
             let mainPageOutsideHumidityValue:HTMLElement = document.getElementById("outsideHumidityValue");
             let mainPageOutsideTemperatureValue:HTMLElement = document.getElementById("outsideTemperatureValue");
+            let mainPageOutsideLocation:HTMLElement = document.getElementById("outsideLocation");
             let weatherReport:WeatherObject = response.data; 
 
             mainPageOutsideHumidityValue.innerText = weatherReport.main.humidity.toString() + "%";
             mainPageOutsideTemperatureValue.innerText = weatherReport.main.temp.toString() + "°C";
+            mainPageOutsideLocation.innerText = weatherReport.name + ", " + weatherReport.sys.country;
             mainPageThirdPartyLastUpdated.innerText = "Last updated: " + new Date().getHours() + ":" + new Date().getMinutes();
         })
         .catch(function(error: AxiosError):void{
