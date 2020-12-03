@@ -5,6 +5,9 @@ import { WeatherReport } from "./WeatherReport";
 let humidityReportList = new HumidityReportList();
 let weatherReport = new WeatherReport();
 
+let settingsLocationButton:HTMLElement = document.getElementById("settingsLocationButton");
+settingsLocationButton.addEventListener('click', () => weatherReport.ChangeLocation());
+
 //console.log(weatherReport.GetWeatherData());
 //weatherReport.GetWeatherData();
 

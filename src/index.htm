@@ -497,20 +497,23 @@
               <button type="button" class="btn btn-light btn-width-height" data-toggle="collapse" data-target="#collapseExample">
                   <i class="uil uil-pen"></i>
               </button>
+              
               <div class="collapse" id="collapseExample">
                   <div class="card card-body">
                       <div class="form-group">
                           <label for="latitude" class="col-form-label">Latitude:</label>
-                          <input type="text" class="form-control" id="latitude">
+                          <input id="settingsLatitudeInput" type="text" class="form-control">
                       </div>
                       <div class="form-group">
                           <label for="longitude" class="col-form-label">Longitude:</label>
-                          <input type="text" class="form-control" id="longitude">
+                          <input id="settingsLongitudeInput" type="text" class="form-control">
                       </div>
-                      <button type="button" class="btn btn-primary">Submit</button>
+                      <button id="settingsLocationButton" type="button" class="btn btn-primary">Submit</button>
                   </div>
               </div>
       </div>
+
+      <p id="settingsCurrentLocation">Current Location: Roskilde, DK</p>
       
       <button class="save">Save</button>
 

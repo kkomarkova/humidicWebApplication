@@ -9,7 +9,10 @@ export class WeatherReport{
     private currentWeatherPath:string = 'weather/';
     private weatherForecastPath:string = 'forecast/daily/';
 
-    private url:string = this.weatherURL + this.currentWeatherPath + "?lat=55.65&lon=12.083333&units=metric&apikey=" + this.weatherAPIkey;
+    private latitude:number = 55.65;
+    private longitude:number = 12.083333;
+
+    private url:string = this.weatherURL + this.currentWeatherPath + "?lat="+ this.latitude +"&lon="+ this.longitude +"&units=metric&apikey=" + this.weatherAPIkey;
 
     //async GetWeatherData():Promise<string>{
         //return fetch(this.url)
@@ -30,17 +33,30 @@ export class WeatherReport{
             let mainPageOutsideHumidityValue:HTMLElement = document.getElementById("outsideHumidityValue");
             let mainPageOutsideTemperatureValue:HTMLElement = document.getElementById("outsideTemperatureValue");
             let mainPageOutsideLocation:HTMLElement = document.getElementById("outsideLocation");
+            let settingsLocation:HTMLElement = document.getElementById("settingsCurrentLocation");
             let weatherReport:WeatherObject = response.data; 
 
             mainPageOutsideHumidityValue.innerText = weatherReport.main.humidity.toString() + "%";
             mainPageOutsideTemperatureValue.innerText = weatherReport.main.temp.toString() + "°C";
             mainPageOutsideLocation.innerText = weatherReport.name + ", " + weatherReport.sys.country;
+            settingsLocation.innerText = weatherReport.name + ", " + weatherReport.sys.country;
             mainPageThirdPartyLastUpdated.innerText = "Last updated: " + new Date().getHours() + ":" + new Date().getMinutes();
         })
         .catch(function(error: AxiosError):void{
             console.log(error);
             mainPageThirdPartyLastUpdated.innerText = "Last update was unsuccesful.";
         })
+    }
+
+    ChangeLocation():void{
+        try{
+            this.latitude = +(<HTMLInputElement>document.getElementById("settingsLatitudeInput")).value;
+            this.longitude = +(<HTMLInputElement>document.getElementById("settingsLongitudeInput")).value;
+        }
+        finally{
+            this.url = this.weatherURL + this.currentWeatherPath + "?lat="+ this.latitude +"&lon="+ this.longitude +"&units=metric&apikey=" + this.weatherAPIkey;
+            this.GetWeatherData();
+        }        
     }
 }
 
