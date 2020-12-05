@@ -2,6 +2,7 @@ import axios,{
     AxiosResponse,
     AxiosError
 } from "../../node_modules/axios/index"
+import { relativeTimeThreshold } from "../../node_modules/moment/ts3.1-typings/moment";
 
 import {HumidityReport} from './HumidityReport';
 
@@ -14,9 +15,9 @@ export class HumidityReportList{
     public static CurrentHumidity:HumidityReport;
 
     constructor(){
-        this.GetAllReports();
+        //this.GetAllReports();
         //this.FindLatestReport();
-        this.UpdateMainPageHumidity();
+        //this.UpdateMainPageHumidity();
     }
 
     public UpdateMainPageHumidity():void{
@@ -36,26 +37,24 @@ export class HumidityReportList{
 
     public FindLatestReport():HumidityReport{
         let latestHumidity:HumidityReport;
-        if(HumidityReportList.HumidityReports.length != 0){
-            latestHumidity = HumidityReportList.HumidityReports.reduce((a, b) => (a.date > b.date ? a : b));
-        }
+        latestHumidity = HumidityReportList.HumidityReports.reduce((a, b) => (a.date > b.date ? a : b));
         return latestHumidity;
         //console.log("The latest humidity is: " + latestHumidity.DebugReport());
     }
 
-    public GetAllReports():void{
-        axios.get(WebServiceUrl)
+    public async GetAllReports():Promise<void>{
+        await axios.get(WebServiceUrl)
         .then(function(response: AxiosResponse<HumidityReport[]>):void{
             console.log(response);
             console.log("Statuscode is :" + response.status);
-            
             //Empties the current array
             HumidityReportList.HumidityReports = new Array<HumidityReport>();
 
             response.data.forEach((humidity: HumidityReport) => {
                 console.log(humidity);
-                
-                HumidityReportList.HumidityReports.push(new HumidityReport(humidity.level, humidity.date));
+
+                let convertedDate:Date = HumidityReportList.ConvertDateFormat(humidity.date.toString());                
+                HumidityReportList.HumidityReports.push(new HumidityReport(humidity.level, convertedDate));
 
                 //Fake data
                 //HumidityReportList.HumidityReports.push(
@@ -78,5 +77,33 @@ export class HumidityReportList{
         .catch(function(error:AxiosError):void{
             console.log(error);
         })
+    }
+
+    //This just didn't work for some reason unless I made it static
+    public static ConvertDateFormat(date:string):Date{
+        //console.log(date); //2020-11-20T11:00:00
+        let splitDate:string[] = date.split("T", 2);
+        //console.log(splitDate);
+        let splitDay:string[] = splitDate[0].split("-", 3);
+        //console.log(splitDay);
+        let splitHour:string[] = splitDate[1].split(":", 3);
+        
+        let day:number = +splitDay[2];
+        let month:number = +splitDay[1];
+        let year:number = +splitDay[0];
+        let hour:number = +splitHour[0];
+        let minute:number = +splitHour[1];
+        let second:number;
+
+        //Removes miliseconds if necessary
+        if (splitHour[2].includes(".")){
+            let splitSecond:string[] = splitHour[2].split(".", 2);
+            second = +splitSecond[0];
+        }
+        else{
+            second = +splitHour[2];
+        }
+
+        return new Date(year, month, day, hour, minute, second);
     }
 }
