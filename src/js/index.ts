@@ -21,7 +21,7 @@ settingsLocationButton.addEventListener('click', () => weatherReport.ChangeLocat
         weatherReport.GetWeatherData();
 
         let currentMinute:number = new Date().getMinutes();
-        if(currentMinute % 15 == 0){
+        if(currentMinute % 5 == 0){
             humidityReportList.GetAllReports();
             //humidityReportList.FindLatestReport();
             humidityReportList.UpdateMainPageHumidity();
