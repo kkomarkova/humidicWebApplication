@@ -152,3 +152,14 @@ body {
       width: 45px;
       height: 45px;
     }
+
+.horizontal-scrollable>.row {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .horizontal-scrollable>.row>.col {
+            display: inline-block;
+            float: none;
+        }
