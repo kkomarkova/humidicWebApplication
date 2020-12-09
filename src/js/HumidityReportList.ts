@@ -79,6 +79,139 @@ export class HumidityReportList{
         })
     }
 
+    public static async HumidityReportFor3Ddays():Promise<void>{
+        let list:HTMLOListElement=<HTMLOListElement> document.getElementById("list");
+        await axios.get("https://humidityweb.azurewebsites.net/Humidity/3days")
+        .then(function(response: AxiosResponse<HumidityReport[]>):void{
+          console.log(response);
+          console.log("Statuscode for 1 days is :" + response.status)
+        
+       
+                     
+          while(list.firstChild){
+            list.removeChild(list.lastChild);
+        }
+
+        HumidityReportList.HumidityReports = new Array<HumidityReport>();
+
+        response.data.forEach((humidity: HumidityReport) => {
+                         
+         let datetime = new Date(humidity.date);
+         let day = datetime.getDate();
+         let month = datetime.getMonth() +1 ; //month: 0-11
+         let year = datetime.getFullYear();
+         let date = day + "-" + month + "-" + year + "   ";
+
+         let hours = datetime.getHours();
+         let minutes = datetime.getMinutes().toString().padStart(2, "0");;
+         let time = hours + ":" + minutes ;      
+         
+           let newRow: HTMLLIElement = HumidityReportList.addList( humidity.level + "%" +" \xa0\xa0\xa0\xa0\xa0\xa0\xa0  " +  date+" \xa0\xa0\xa0\xa0\xa0\xa0\xa0 "   + time);
+            list.appendChild(newRow);
+
+         console.log(humidity);                 
+    })
+    
+  })
+  .catch( function (error: AxiosError ):  void {
+    console.log(error)
+  })
+
+}
+
+    
+                public static async HumidityReportFor7Ddays():Promise<void>{
+
+                 let list:HTMLOListElement=<HTMLOListElement> document.getElementById("list");
+        
+                 await axios.get("https://humidityweb.azurewebsites.net/Humidity/7days")
+                 .then(function(response: AxiosResponse<HumidityReport[]>):void{
+                   console.log(response);
+                   console.log("Statuscode for 1 days is :" + response.status)
+                    
+                   while(list.firstChild){
+                       list.removeChild(list.lastChild);
+                   }
+
+                   HumidityReportList.HumidityReports = new Array<HumidityReport>();
+
+                   response.data.forEach((humidity: HumidityReport) => {
+                    
+                    
+                    let datetime = new Date(humidity.date);
+                    let day = datetime.getDate();
+                    let month = datetime.getMonth() +1; //month: 0-11
+                    let year = datetime.getFullYear();
+                    let date = day + "-" + month + "-" + year + "   ";
+
+                    let hours = datetime.getHours();
+                    let minutes = datetime.getMinutes().toString().padStart(2, "0");;
+                    let time = hours + ":" + minutes ;      
+                    
+                      let newRow: HTMLLIElement = HumidityReportList.addList(humidity.level + "%" +" \xa0\xa0\xa0\xa0\xa0\xa0\xa0  " +  date+" \xa0\xa0\xa0\xa0\xa0\xa0\xa0 "   + time);
+                       list.appendChild(newRow);
+       
+                    console.log(humidity);                 
+               })
+               
+             })
+             .catch( function (error: AxiosError ):  void {
+               console.log(error)
+             })
+   
+         }
+
+         public static async HumidityReportFor1Dday():Promise<void>{
+            //let table: HTMLTableElement=<HTMLTableElement> document.getElementById("ReportTable");
+
+            let list:HTMLOListElement=<HTMLOListElement> document.getElementById("list");
+                 await axios.get("https://humidityweb.azurewebsites.net/Humidity/1day")
+                 .then(function(response: AxiosResponse<HumidityReport[]>):void{
+                   console.log(response);
+                   console.log("Statuscode for 1 days is :" + response.status)
+                 
+                     
+                   while(list.firstChild){
+                    list.removeChild(list.lastChild);
+                }
+
+                HumidityReportList.HumidityReports = new Array<HumidityReport>();
+
+                response.data.forEach((humidity: HumidityReport) => {
+
+                 
+                    
+                 let datetime = new Date(humidity.date);
+                 let day = datetime.getDate();
+                 let month = datetime.getMonth() +1 ; //month: 0-11
+                 let year = datetime.getFullYear();
+                 let date = day + "-" + month + "-" + year + "   ";
+
+                 let hours = datetime.getHours();
+                 let minutes = datetime.getMinutes().toString().padStart(2, "0");;
+                 let time = hours + ":" + minutes ;      
+                 
+                   let newRow: HTMLLIElement = HumidityReportList.addList(humidity.level + "%" +" \xa0\xa0\xa0\xa0\xa0\xa0\xa0  " +  date+" \xa0\xa0\xa0\xa0\xa0\xa0\xa0 "   + time);
+                    list.appendChild(newRow);
+    
+                 console.log(humidity);                 
+            })
+            
+          })
+          .catch( function (error: AxiosError ):  void {
+            console.log(error)
+          })
+
+      }
+
+      public static addList(text:string):HTMLLIElement{
+
+        let newLi :HTMLLIElement = document.createElement('li');
+        let newTextNode : Text = document.createTextNode(text);
+        newLi.appendChild(newTextNode);
+        return newLi;
+    }
+
     //This just didn't work for some reason unless I made it static
     public static ConvertDateFormat(date:string):Date{
         //console.log(date); //2020-11-20T11:00:00
