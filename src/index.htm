@@ -290,6 +290,9 @@
                                 aria-expanded="false">
                                 Report
                             </button>
+                        </br>
+                    </br>
+                        <button type="button" class="btn btn-danger">Delete reports</button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" id="1day" href="#">1 day</a>
                                 <a class="dropdown-item" id="3days" href="#">3 days</a>
@@ -298,6 +301,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="row mt-2 h-auto">
                     <div class="col-8">
                         <div class="card stats w-100 h-auto">
@@ -421,7 +425,8 @@
                                                     <p>John Doe</p>
                                                 </div>
                                                 <div class="col-3">
-                                                    <div class="dropdown">
+                                                    <!-- <button class="uil uil-setting"></button> -->
+                                                    <!-- <div class="dropdown">
                                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                                             id="dropdownMenuButton" data-toggle="dropdown"
                                                             aria-haspopup="true" aria-expanded="false">
@@ -433,8 +438,8 @@
                                                             <button class="dropdown-item" href="#" data-toggle="collapse"
                                                                 data-target="#collapseDelete" aria-expanded="false"
                                                                 aria-controls="collapseDelete">Delete</button>
-                                                        </div>
-                                                    </div>
+                                                        </div> -->
+                                                    <!-- </div>
                                                     <div class="collapse" id="collapseDelete">
                                                         <div class="card card-body">
                                                             You are going to delete your preference. This change will be
@@ -496,7 +501,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="pl-4">
                                                     <ul class="list-inline">
                                                         <li class="bold pr-3">Min.</li>
@@ -596,10 +601,16 @@
                                                 <input type="text" class="form-control" id="maxhumidity">
                                             </div>
                                             <div class="form-group">
-                                                <label for="updateinterval" class="col-form-label">The update
-                                                    interval:</label>
-                                                <input type="text" class="form-control" id="updateinterval">
-                                            </div>
+                                                <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Update interval
+                                                  </button>
+                                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">15 minutes</a>
+                                                    <a class="dropdown-item" href="#">30 minutes</a>
+                                                    <a class="dropdown-item" href="#">60 minutes</a>
+                                                  </div>
+                                                </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
