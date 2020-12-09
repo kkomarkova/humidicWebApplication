@@ -9,11 +9,13 @@ let userPreferences = new UserPreferences();
 
 let settingsLocationButton:HTMLElement = document.getElementById("settingsLocationButton");
 settingsLocationButton.addEventListener('click', () => weatherReport.ChangeLocation());
+//let settingsPreferenceCard = <HTMLDivElement>document.getElementById("settingsPreferenceCard");
+//settingsPreferenceCard.addEventListener('click', () => console.log("clicky"));
 
 //console.log(weatherReport.GetWeatherData());
 //weatherReport.GetWeatherData();
 //humidityReportList.GetAllReports();
-userPreferences.ShowPreferences();
+//userPreferences.ShowPreferences();
 
 (async () => {
     await humidityReportList.GetAllReports(); 

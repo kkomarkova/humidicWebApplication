@@ -6,7 +6,7 @@ import { relativeTimeThreshold } from "../../node_modules/moment/ts3.1-typings/m
 
 import {HumidityReport} from './HumidityReport';
 
-const WebServiceUrl:string = "https://humidityweb.azurewebsites.net/api/humidity";
+const WebServiceUrl:string = "https://humidityweb.azurewebsites.net/humidity";
 
 export class HumidityReportList{
     public static HumidityReports:Array<HumidityReport> = new Array<HumidityReport>(
