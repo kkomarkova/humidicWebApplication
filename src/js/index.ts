@@ -19,6 +19,15 @@ settingsSelectPreference1Button.addEventListener('click', userPreferences.Select
 let settingsSelectPreference2Button:HTMLElement = document.getElementById("2preferenceSelect");
 settingsSelectPreference2Button.addEventListener('click', userPreferences.SelectNewPreference);
 
+let settingsConfirmEditButton:HTMLElement = document.getElementById("preferenceEditConfirm");
+settingsConfirmEditButton.addEventListener('click', () => userPreferences.EditPreference());
+let settingsEdit0Button:HTMLElement = document.getElementById("0edit");
+settingsEdit0Button.addEventListener('click', userPreferences.GetEditPreferenceId);
+let settingsEdit1Button:HTMLElement = document.getElementById("1edit");
+settingsEdit1Button.addEventListener('click', userPreferences.GetEditPreferenceId);
+let settingsEdit2Button:HTMLElement = document.getElementById("2edit");
+settingsEdit2Button.addEventListener('click', userPreferences.GetEditPreferenceId);
+
 userPreferences.ShowPreferences();
 UserPreferences.LoadSelectedPreference();
 

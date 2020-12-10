@@ -26,6 +26,7 @@ export class UserPreferences{
     );
 
     static SelectedPreference:UserPreference;
+    static PressedEditButton:number;
 
     constructor(){
         UserPreferences.SelectedPreference = UserPreferences.UserPreferences[0];
@@ -71,6 +72,35 @@ export class UserPreferences{
     }
 
     public EditPreference(){
+        //This also works
+        let newName:string = <HTMLInputElement>document.getElementById("preferenceEditName").value;
+        let newMin:number = <HTMLInputElement>document.getElementById("preferenceEditMin").value;
+        let newMax:number = <HTMLInputElement>document.getElementById("preferenceEditMax").value;
+        let newInterval:UpdateInterval;
+        let selectedInterval:HTMLSelectElement = <HTMLSelectElement>document.getElementById("preferenceEditInterval");
+
+        switch (selectedInterval.value){
+            case("15"):
+                newInterval = UpdateInterval.Fifteen;
+                break;
+            case("30"):
+                newInterval = UpdateInterval.Thirty;
+                break;
+            case("60"):
+                newInterval = UpdateInterval.Sixty;
+                break;
+        }
         
+        UserPreferences.UserPreferences[UserPreferences.PressedEditButton] = new UserPreference(newName, newMin, newMax, newInterval);
+        this.ShowPreferences();
+        UserPreferences.SelectedPreference = UserPreferences.UserPreferences[UserPreferences.PressedEditButton];
+        UserPreferences.LoadSelectedPreference();
+    }
+
+    public GetEditPreferenceId(){
+        let pressedButton:HTMLElement = this;
+        let pressedButtonID:string = pressedButton.getAttribute("id").toString()[0];
+        UserPreferences.PressedEditButton = parseInt(pressedButtonID);
+        console.log(UserPreferences.PressedEditButton);
     }
 }
