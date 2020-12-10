@@ -2,6 +2,7 @@ import axios,{
     AxiosResponse,
     AxiosError
 } from "../../node_modules/axios/index"
+import { relativeTimeThreshold } from "../../node_modules/moment/ts3.1-typings/moment";
 
 export class WeatherReport{
     private weatherURL:string = 'http://api.openweathermap.org/data/2.5/';
@@ -14,15 +15,9 @@ export class WeatherReport{
 
     private url:string = this.weatherURL + this.currentWeatherPath + "?lat="+ this.latitude +"&lon="+ this.longitude +"&units=metric&apikey=" + this.weatherAPIkey;
 
-    //async GetWeatherData():Promise<string>{
-        //return fetch(this.url)
-        //.then(function(response){
-        //    return response.json();
-        //})
-        //.then(function(json){
-        //    return json;
-        //});
-    //}
+    constructor(){
+        this.LoadFromLocal();
+    }
 
     GetWeatherData():void{
         let mainPageThirdPartyLastUpdated:HTMLElement = document.getElementById("thirdPartyLastUpdated");
@@ -56,7 +51,34 @@ export class WeatherReport{
         finally{
             this.url = this.weatherURL + this.currentWeatherPath + "?lat="+ this.latitude +"&lon="+ this.longitude +"&units=metric&apikey=" + this.weatherAPIkey;
             this.GetWeatherData();
-        }        
+        }
+        this.SaveToLocal();        
+    }
+
+    LoadFromLocal(){
+        let latitude = window.localStorage.getItem("latitude");
+        let longitude = window.localStorage.getItem("longitude");
+
+        if(latitude == null){
+            this.latitude = 55.65;
+        }
+        else{
+            this.latitude = parseFloat(latitude);
+        }
+
+        if(longitude == null){
+            this.longitude = 12.083333;
+        }
+        else{
+            this.longitude = parseFloat(longitude);
+        }
+
+        this.url = this.weatherURL + this.currentWeatherPath + "?lat="+ this.latitude +"&lon="+ this.longitude +"&units=metric&apikey=" + this.weatherAPIkey;
+    }
+
+    SaveToLocal(){
+        window.localStorage.setItem("latitude", this.latitude.toString());
+        window.localStorage.setItem("longitude", this.longitude.toString());
     }
 }
 
