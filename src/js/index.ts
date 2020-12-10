@@ -39,7 +39,7 @@ UserPreferences.LoadSelectedPreference();
         weatherReport.GetWeatherData();
 
         let currentMinute:number = new Date().getMinutes();
-        if(currentMinute % 5 == 0){
+        if(currentMinute % UserPreferences.SelectedPreference.updateInterval == 0){
             humidityReportList.GetAllReports();
             humidityReportList.UpdateMainPageHumidity();
         }
