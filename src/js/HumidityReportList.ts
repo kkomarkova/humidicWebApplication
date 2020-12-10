@@ -5,8 +5,9 @@ import axios,{
 import { relativeTimeThreshold } from "../../node_modules/moment/ts3.1-typings/moment";
 
 import {HumidityReport} from './HumidityReport';
+import { UserPreferences } from "./UserPreferences";
 
-const WebServiceUrl:string = "https://humidityweb.azurewebsites.net/api/humidity";
+const WebServiceUrl:string = "https://humidityweb.azurewebsites.net/humidity";
 
 export class HumidityReportList{
     public static HumidityReports:Array<HumidityReport> = new Array<HumidityReport>(
@@ -30,16 +31,39 @@ export class HumidityReportList{
         if(timeDifference < 0){
             timeDifference += 60;
         }
+        let hourDifference:number = new Date().getHours() - latestHumidity.date.getHours();
+        if(hourDifference < 0){
+            hourDifference += 60;
+        }
+        let dayDifference:number = new Date().getDate() - latestHumidity.date.getDate();
+        if(dayDifference < 0){
+            dayDifference *-1;
+        }
 
         mainPageHumidityValue.innerHTML = latestHumidity.level.toString() + "%";
         mainPageHumidityLastUpdated.innerHTML = "Last Updated: " + timeDifference + " minutes ago.";
+        if(hourDifference != 0){
+            mainPageHumidityLastUpdated.innerHTML = "Last Updated: " + timeDifference + " minutes ago, " + hourDifference + " hours ago.";
+        }
+        if(dayDifference != 0){
+            mainPageHumidityLastUpdated.innerHTML = "Last Updated: " + timeDifference + " minutes ago, " + hourDifference + " hours ago, " + dayDifference + " days ago.";
+        }
+
+        if(latestHumidity.level < UserPreferences.SelectedPreference.minHumidity || latestHumidity.level > UserPreferences.SelectedPreference.maxHumidity){
+            console.log("ALEERT!!!!!!!!!!!!!!!!!!!!!!!!!");
+            let humidityCard:HTMLElement = document.getElementById("humidityCard");
+            humidityCard.setAttribute("class", "alertcard mb-5 stats w-100");
+        }
+        else{
+            let humidityCard:HTMLElement = document.getElementById("humidityCard");
+            humidityCard.setAttribute("class", "card mb-5 stats w-100");
+        }
     }
 
     public FindLatestReport():HumidityReport{
         let latestHumidity:HumidityReport;
         latestHumidity = HumidityReportList.HumidityReports.reduce((a, b) => (a.date > b.date ? a : b));
         return latestHumidity;
-        //console.log("The latest humidity is: " + latestHumidity.DebugReport());
     }
 
     public async GetAllReports():Promise<void>{
