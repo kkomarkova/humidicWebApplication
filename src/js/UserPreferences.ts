@@ -61,6 +61,14 @@ export class UserPreferences{
         mainInterval.innerText = "Update interval: " + UserPreferences.SelectedPreference.updateInterval + " minutes";
 
         greeting.innerText = "Hello " + UserPreferences.SelectedPreference.name + ",\n let's check the humidity!";
+
+        for (let index = 0; index < UserPreferences.UserPreferences.length; index++) {
+            let card:HTMLElement = document.getElementById("card" + index);
+            card.setAttribute("class", "card");            
+        }
+
+        let selectedCard:HTMLElement = document.getElementById("card"  + UserPreferences.UserPreferences.indexOf(UserPreferences.UserPreferences.find(preference => preference.name == UserPreferences.SelectedPreference.name)));
+        selectedCard.setAttribute("class", "selectedcard")
     }
 
     public SelectNewPreference(){
@@ -72,6 +80,14 @@ export class UserPreferences{
 
         UserPreferences.SaveToLocal();
         UserPreferences.LoadSelectedPreference();
+
+        for (let index = 0; index < UserPreferences.UserPreferences.length; index++) {
+            let card:HTMLElement = document.getElementById("card" + index);
+            card.setAttribute("class", "card");            
+        }
+
+        let selectedCard:HTMLElement = document.getElementById("card"  + pressedButtonID);
+        selectedCard.setAttribute("class", "selectedcard")
     }
 
     public EditPreference(){
