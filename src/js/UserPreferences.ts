@@ -14,51 +14,54 @@ class UserPreference{
         this.name = name;
         this.minHumidity = minHumidity;
         this.maxHumidity = maxHumidity;
-        //For now
         this.updateInterval = updateInterval;
     }
 }
 
 export class UserPreferences{
-    static PreferenceCards:Array<HTMLDivElement>;
     static UserPreferences:Array<UserPreference> = new Array<UserPreference>(
-        new UserPreference("Default", 25, 40, UpdateInterval.Fifteen),
-        new UserPreference("Test1", 30, 50, UpdateInterval.Fifteen),
-        new UserPreference("Test2", 20, 80, UpdateInterval.Fifteen),
-        new UserPreference("Test3", 4, 8, UpdateInterval.Fifteen)
+        new UserPreference("Profile 1", 25, 40, UpdateInterval.Fifteen),
+        new UserPreference("Profile 2", 30, 50, UpdateInterval.Fifteen),
+        new UserPreference("Profile 3", 20, 80, UpdateInterval.Fifteen),
     );
 
     static SelectedPreference:UserPreference;
 
-    //Not done
-    public CreateNewPreference(){
-        let preferenceName:string = document.getElementById("newPreferenceName").innerText;
-        let minValue:number = +document.getElementById("newPreferenceMin").innerText;
-        let maxValue:number = +document.getElementById("newPreferenceMax").innerText;
-        //Switch statement based on what's selected?
-        let updateInterval:UpdateInterval;
-
-        //UserPreferences.UserPreferences.push(new UserPreference(preferenceName, minValue, maxValue, updateInterval));
-        UserPreferences.UserPreferences.push(new UserPreference("Test", 30, 50, UpdateInterval.Fifteen));
+    public ShowPreferences(){
+        for (let index = 0; index < 3; index++) {
+            let preferenceName:HTMLElement = document.getElementById(index + "preferenceName");
+            let preferenceMin:HTMLElement = document.getElementById(index + "preferenceMin");
+            let preferenceMax:HTMLElement = document.getElementById(index + "preferenceMax");
+            let preferenceInterval:HTMLElement = document.getElementById(index + "preferenceInterval");
+            
+            preferenceName.innerText = UserPreferences.UserPreferences[index].name;
+            preferenceMin.innerText = UserPreferences.UserPreferences[index].minHumidity + "%";
+            preferenceMax.innerText = UserPreferences.UserPreferences[index].maxHumidity + "%";
+            preferenceInterval.innerText = "Update interval: " + UserPreferences.UserPreferences[index].updateInterval + " minutes";
+        }
     }
 
-    public ShowPreferences(){
-        UserPreferences.PreferenceCards = new Array<HTMLDivElement>();
-        let preferenceContainer = <HTMLDivElement>document.getElementById("settingsPreferenceContainer");
-        
-        while (preferenceContainer.firstChild) {
-            preferenceContainer.removeChild(preferenceContainer.lastChild);
-        }
+    public LoadSelectedPreference(){
+        UserPreferences.SelectedPreference = UserPreferences.UserPreferences[0];
 
-        let index = 0;
-        UserPreferences.UserPreferences.forEach((preference:UserPreference) => {
-            preferenceContainer.innerHTML += '<div class="col-6"><div id="settingsPreferenceCard'+ index +'" class="card stats"><div class="card-body"><div class="row"><div class="col-3"><i class="uil uil-user icon-40"></i></div><div class="col-6"><p>'+ preference.name +'</p></div><div class="col-3"><div class="dropdown"><button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false"><i class="uil uil-setting"></i></button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><button class="dropdown-item" href="#" data-toggle="modal"data-target="#editModal">Edit</button><button class="dropdown-item" href="#" data-toggle="collapse"data-target="#collapseDelete" aria-expanded="false"aria-controls="collapseDelete">Delete</button></div></div><div class="collapse"><div class="card card-body">You are going to delete your preference. This change will be permanent<button type="button" class="btn btn-danger">Delete</button></div><div class="modal fade" tabindex="-1" role="dialog"aria-labelledby="editModalLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Edit my preference</h5><button type="button" class="close"data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><form><div class="form-group"><label for="preference-name"class="col-form-label">Preferencename:</label><input type="text" class="form-control"></div><div class="form-group"><label for="minhumidity"class="col-form-label">Minimumhumidity level:</label><textarea class="form-control"></textarea></div><div class="form-group"><label for="maxhumidity"class="col-form-label">Maximumhumidity level:</label><input type="text" class="form-control"></div><div class="form-group"><label for="updateinterval"class="col-form-label">Theupdate interval:</label><input type="text" class="form-control"></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary"data-dismiss="modal">Close</button><button type="button" class="btn btn-primary">Updatepreference</button></div></div></div></div></div></div><div class="pl-4"><ul class="list-inline"><li class="bold pr-3">Min.</li><li>'+ preference.minHumidity +'%</li><li class="bold pr-3">Max.</li><li>'+ preference.maxHumidity +'%</li></ul><p class="date">Update interval: '+ preference.updateInterval +' minutes</p></div></div></div></div></div>';
-            UserPreferences.PreferenceCards.push(<HTMLDivElement>document.getElementById("settingsPreferenceCard"+ index));
-            index++;
-        });
+        let greeting:HTMLElement = document.getElementById("mainPageGreeting");
+        let mainName:HTMLElement = document.getElementById("mainPreferenceName");
+        let mainMin:HTMLElement = document.getElementById("mainPreferenceMin");
+        let mainMax:HTMLElement = document.getElementById("mainPreferenceMax");
+        let mainInterval:HTMLElement = document.getElementById("mainPreferenceInterval");
 
-        for (let i = 0; i < UserPreferences.UserPreferences.length; i++) {
-            UserPreferences.PreferenceCards[i].addEventListener('click', () => console.log("clicky"));
-        }
+        mainName.innerText = UserPreferences.SelectedPreference.name;
+        mainMin.innerText = UserPreferences.SelectedPreference.minHumidity + "%";
+        mainMax.innerText = UserPreferences.SelectedPreference.maxHumidity + "%";
+        mainInterval.innerText = "Update interval: " + UserPreferences.SelectedPreference.updateInterval + " minutes";
+
+        greeting.innerText = "Hello " + UserPreferences.SelectedPreference.name + ",\n let's check the humidity!";
+    }
+
+    public SelectNewPreference(){
+        //This works, don't let visual studio code fool you
+        let pressedButton:HTMLElement = this;
+        let pressedButtonID:string = pressedButton.getAttribute("id").toString()[0];
+        console.log(pressedButtonID);
     }
 }
