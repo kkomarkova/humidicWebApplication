@@ -20,7 +20,7 @@ let settingsSelectPreference2Button:HTMLElement = document.getElementById("2pref
 settingsSelectPreference2Button.addEventListener('click', userPreferences.SelectNewPreference);
 
 userPreferences.ShowPreferences();
-userPreferences.LoadSelectedPreference();
+UserPreferences.LoadSelectedPreference();
 
 (async () => {
     await humidityReportList.GetAllReports(); 

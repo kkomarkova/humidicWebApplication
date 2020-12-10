@@ -27,6 +27,10 @@ export class UserPreferences{
 
     static SelectedPreference:UserPreference;
 
+    constructor(){
+        UserPreferences.SelectedPreference = UserPreferences.UserPreferences[0];
+    }
+
     public ShowPreferences(){
         for (let index = 0; index < 3; index++) {
             let preferenceName:HTMLElement = document.getElementById(index + "preferenceName");
@@ -41,9 +45,7 @@ export class UserPreferences{
         }
     }
 
-    public LoadSelectedPreference(){
-        UserPreferences.SelectedPreference = UserPreferences.UserPreferences[0];
-
+    public static LoadSelectedPreference(){
         let greeting:HTMLElement = document.getElementById("mainPageGreeting");
         let mainName:HTMLElement = document.getElementById("mainPreferenceName");
         let mainMin:HTMLElement = document.getElementById("mainPreferenceMin");
@@ -62,6 +64,8 @@ export class UserPreferences{
         //This works, don't let visual studio code fool you
         let pressedButton:HTMLElement = this;
         let pressedButtonID:string = pressedButton.getAttribute("id").toString()[0];
-        console.log(pressedButtonID);
+        UserPreferences.SelectedPreference = UserPreferences.UserPreferences[parseInt(pressedButtonID)];
+
+        UserPreferences.LoadSelectedPreference();
     }
 }
