@@ -43,10 +43,10 @@ export class HumidityReportList{
         mainPageHumidityValue.innerHTML = latestHumidity.level.toString() + "%";
         mainPageHumidityLastUpdated.innerHTML = "Last Updated: " + timeDifference + " minutes ago.";
         if(hourDifference != 0){
-            mainPageHumidityLastUpdated.innerHTML = "Last Updated: " + timeDifference + " minutes ago, " + hourDifference + " hours ago.";
+            mainPageHumidityLastUpdated.innerHTML = "Last Updated: " + timeDifference + " minutes, " + hourDifference + " hours ago.";
         }
         if(dayDifference != 0){
-            mainPageHumidityLastUpdated.innerHTML = "Last Updated: " + timeDifference + " minutes ago, " + hourDifference + " hours ago, " + dayDifference + " days ago.";
+            mainPageHumidityLastUpdated.innerHTML = "Last Updated: " + timeDifference + " minutes, " + hourDifference + " hours, " + dayDifference + " days ago.";
         }
 
         if(latestHumidity.level < UserPreferences.SelectedPreference.minHumidity || latestHumidity.level > UserPreferences.SelectedPreference.maxHumidity){
