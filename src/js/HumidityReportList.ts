@@ -6,7 +6,7 @@ import { relativeTimeThreshold } from "../../node_modules/moment/ts3.1-typings/m
 
 import {HumidityReport} from './HumidityReport';
 
-const WebServiceUrl:string = "https://humidityweb.azurewebsites.net/humidity";
+const WebServiceUrl:string = "https://humidityweb.azurewebsites.net/api/humidity";
 
 export class HumidityReportList{
     public static HumidityReports:Array<HumidityReport> = new Array<HumidityReport>(
@@ -97,13 +97,13 @@ export class HumidityReportList{
         response.data.forEach((humidity: HumidityReport) => {
                          
          let datetime = new Date(humidity.date);
-         let day = datetime.getDate();
+         let day = datetime.getDate().toString().padStart(2, "0");
          let month = datetime.getMonth() +1 ; //month: 0-11
          let year = datetime.getFullYear();
          let date = day + "-" + month + "-" + year + "   ";
 
-         let hours = datetime.getHours();
-         let minutes = datetime.getMinutes().toString().padStart(2, "0");;
+         let hours = datetime.getHours().toString().padStart(2, "0");
+         let minutes = datetime.getMinutes().toString().padStart(2, "0");
          let time = hours + ":" + minutes ;      
          
            let newRow: HTMLLIElement = HumidityReportList.addList( humidity.level + "%" +" \xa0\xa0\xa0\xa0\xa0\xa0\xa0  " +  date+" \xa0\xa0\xa0\xa0\xa0\xa0\xa0 "   + time);
@@ -139,12 +139,12 @@ export class HumidityReportList{
                     
                     
                     let datetime = new Date(humidity.date);
-                    let day = datetime.getDate();
+                    let day = datetime.getDate().toString().padStart(2, "0");
                     let month = datetime.getMonth() +1; //month: 0-11
                     let year = datetime.getFullYear();
                     let date = day + "-" + month + "-" + year + "   ";
 
-                    let hours = datetime.getHours();
+                    let hours = datetime.getHours().toString().padStart(2, "0");
                     let minutes = datetime.getMinutes().toString().padStart(2, "0");;
                     let time = hours + ":" + minutes ;      
                     
@@ -162,8 +162,7 @@ export class HumidityReportList{
          }
 
          public static async HumidityReportFor1Dday():Promise<void>{
-            //let table: HTMLTableElement=<HTMLTableElement> document.getElementById("ReportTable");
-
+           
             let list:HTMLOListElement=<HTMLOListElement> document.getElementById("list");
                  await axios.get("https://humidityweb.azurewebsites.net/Humidity/1day")
                  .then(function(response: AxiosResponse<HumidityReport[]>):void{
@@ -182,12 +181,12 @@ export class HumidityReportList{
                  
                     
                  let datetime = new Date(humidity.date);
-                 let day = datetime.getDate();
+                 let day = datetime.getDate().toString().padStart(2, "0");
                  let month = datetime.getMonth() +1 ; //month: 0-11
                  let year = datetime.getFullYear();
                  let date = day + "-" + month + "-" + year + "   ";
 
-                 let hours = datetime.getHours();
+                 let hours = datetime.getHours().toString().padStart(2, "0");
                  let minutes = datetime.getMinutes().toString().padStart(2, "0");;
                  let time = hours + ":" + minutes ;      
                  
@@ -211,6 +210,22 @@ export class HumidityReportList{
         newLi.appendChild(newTextNode);
         return newLi;
     }
+
+    public static DeleteOldData(): void{
+
+        axios.delete("https://humidityweb.azurewebsites.net/Humidity")
+        .then(function(response : AxiosResponse){
+
+            console.log( "the delete status is" +response.status)
+             
+        } )
+        .catch( function( error: AxiosError){
+            console.log(error);
+           
+        })
+
+
+       }
 
     //This just didn't work for some reason unless I made it static
     public static ConvertDateFormat(date:string):Date{
