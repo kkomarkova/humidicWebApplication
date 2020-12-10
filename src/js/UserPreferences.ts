@@ -20,20 +20,21 @@ class UserPreference{
 
 export class UserPreferences{
     static UserPreferences:Array<UserPreference> = new Array<UserPreference>(
-        new UserPreference("Profile 1", 25, 40, UpdateInterval.Fifteen),
-        new UserPreference("Profile 2", 30, 50, UpdateInterval.Fifteen),
-        new UserPreference("Profile 3", 20, 80, UpdateInterval.Fifteen),
+        new UserPreference("Profile 1", 25, 50, UpdateInterval.Fifteen),
+        new UserPreference("Profile 2", 25, 50, UpdateInterval.Thirty),
+        new UserPreference("Profile 3", 25, 50, UpdateInterval.Sixty),
     );
 
     static SelectedPreference:UserPreference;
     static PressedEditButton:number;
 
     constructor(){
-        UserPreferences.SelectedPreference = UserPreferences.UserPreferences[0];
+        UserPreferences.LoadFromLocal();
     }
 
     public ShowPreferences(){
-        for (let index = 0; index < 3; index++) {
+        UserPreferences.LoadFromLocal();
+        for (let index = 0; index < UserPreferences.UserPreferences.length; index++) {
             let preferenceName:HTMLElement = document.getElementById(index + "preferenceName");
             let preferenceMin:HTMLElement = document.getElementById(index + "preferenceMin");
             let preferenceMax:HTMLElement = document.getElementById(index + "preferenceMax");
@@ -47,6 +48,7 @@ export class UserPreferences{
     }
 
     public static LoadSelectedPreference(){
+        UserPreferences.LoadFromLocal();
         let greeting:HTMLElement = document.getElementById("mainPageGreeting");
         let mainName:HTMLElement = document.getElementById("mainPreferenceName");
         let mainMin:HTMLElement = document.getElementById("mainPreferenceMin");
@@ -68,6 +70,7 @@ export class UserPreferences{
         let pressedButtonID:string = pressedButton.getAttribute("id").toString()[0];
         UserPreferences.SelectedPreference = UserPreferences.UserPreferences[parseInt(pressedButtonID)];
 
+        UserPreferences.SaveToLocal();
         UserPreferences.LoadSelectedPreference();
     }
 
@@ -92,8 +95,9 @@ export class UserPreferences{
         }
         
         UserPreferences.UserPreferences[UserPreferences.PressedEditButton] = new UserPreference(newName, newMin, newMax, newInterval);
-        this.ShowPreferences();
         UserPreferences.SelectedPreference = UserPreferences.UserPreferences[UserPreferences.PressedEditButton];
+        UserPreferences.SaveToLocal();
+        this.ShowPreferences();        
         UserPreferences.LoadSelectedPreference();
     }
 
@@ -102,5 +106,25 @@ export class UserPreferences{
         let pressedButtonID:string = pressedButton.getAttribute("id").toString()[0];
         UserPreferences.PressedEditButton = parseInt(pressedButtonID);
         console.log(UserPreferences.PressedEditButton);
+    }
+
+    public static LoadFromLocal(){
+        for (let index = 0; index < UserPreferences.UserPreferences.length; index++) {
+            if(window.localStorage.getItem("preference" + index) != null){
+                UserPreferences.UserPreferences[index] = JSON.parse(window.localStorage.getItem("preference" + index));
+            }
+        }
+
+        UserPreferences.SelectedPreference = JSON.parse(window.localStorage.getItem("selectedPreference"));
+        if(UserPreferences.SelectedPreference == null){
+            UserPreferences.SelectedPreference = UserPreferences.UserPreferences[0];
+        }
+    }
+
+    public static SaveToLocal(){
+        for (let index = 0; index < UserPreferences.UserPreferences.length; index++) {
+            window.localStorage.setItem("preference" + index, JSON.stringify(UserPreferences.UserPreferences[index]));
+        }
+        window.localStorage.setItem("selectedPreference", JSON.stringify(UserPreferences.SelectedPreference));
     }
 }
