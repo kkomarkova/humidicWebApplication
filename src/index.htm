@@ -79,7 +79,7 @@
                     </div>
                 </nav>
 
-                <h1 class="pt-5 pb-5">Hello John, <br>
+                <h1 id="mainPageGreeting" class="pt-5 pb-5">Hello John, <br>
                     let’s check the humidity!</h1>
 
                 <div class="row cards">
@@ -151,19 +151,19 @@
                                     <p class="text-center">
                                         <i class="uil uil-user icon-40"></i>
                                     </p>
-                                    <h4 class="text-center">John Doe</h4>
+                                    <h4 id="mainPreferenceName" class="text-center">John Doe</h4>
                                     <div class="container-fluid mt-4 mb-4">
                                         <ul class="minmax">
                                             <li>Min.</li>
-                                            <li>28%</li>
+                                            <li id="mainPreferenceMin">28%</li>
                                         </ul>
                                         <ul class="minmax">
                                             <li>Max.</li>
-                                            <li>53%</li>
+                                            <li id="mainPreferenceMax">53%</li>
                                         </ul>
                                     </div>
 
-                                    <p class="date text-center">Update interval 15 minutes</span>
+                                    <p id="mainPreferenceInterval" class="date text-center">Update interval 15 minutes</span>
                                 </div>
                             </div>
                         </div>
@@ -454,18 +454,18 @@
                                     <i class="uil uil-user icon-40"></i>
                                 </div>
                                 <div class="col-6">
-                                    <p>John Doe</p>
+                                    <p id="0preferenceName">John Doe</p>
                                 </div>
                                 </div>
                                 <div class="pl-4">
                                     <ul class="list-inline">
                                         <li class="bold pr-3">Min.</li>
-                                        <li>28%</li>
+                                        <li id="0preferenceMin">28%</li>
                                         <li class="bold pr-3">Max.</li>
-                                        <li>53%</li>
+                                        <li id="0preferenceMax">53%</li>
                                     </ul>
-                                    <p class="date">Update interval 15 min</p>
-                                    <button type="button" class="btn btn-light"> Select
+                                    <p id="0preferenceInterval" class="date">Update interval 15 min</p>
+                                    <button id="0preferenceSelect" type="button" class="btn btn-light"> Select
                                     </button>
                                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">Edit</button>
                                 </div>
@@ -538,7 +538,7 @@
                                     <i class="uil uil-user icon-40"></i>
                                 </div>
                                 <div class="col-8">
-                                    <p>John Doe</p>
+                                    <p id="1preferenceName">John Doe</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -546,12 +546,12 @@
                                 <div class="col-8">
                                     <ul class="list-inline">
                                         <li class="bold pr-3">Min.</li>
-                                        <li>28%</li>
+                                        <li id="1preferenceMin">28%</li>
                                         <li class="bold pr-3">Max.</li>
-                                        <li>53%</li>
+                                        <li id="1preferenceMax">53%</li>
                                     </ul>
-                                    <p class="date">Update interval 15 min</p>
-                                    <button type="button" class="btn btn-light">Select</button>
+                                    <p id="1preferenceInterval" class="date">Update interval 15 min</p>
+                                    <button id="1preferenceSelect" type="button" class="btn btn-light">Select</button>
                                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">Edit</button>
                                 </div>
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -623,7 +623,7 @@
                                     <i class="uil uil-user icon-40"></i>
                                 </div>
                                 <div class="col-8">
-                                    <p>John Doe</p>
+                                    <p id="2preferenceName">John Doe</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -631,12 +631,12 @@
                                 <div class="col-8">
                                     <ul class="list-inline">
                                         <li class="bold pr-3">Min.</li>
-                                        <li>28%</li>
+                                        <li id="2preferenceMin">28%</li>
                                         <li class="bold pr-3">Max.</li>
-                                        <li>53%</li>
+                                        <li id="2preferenceMax">53%</li>
                                     </ul>
-                                    <p class="date">Update interval 15 min</p>
-                                    <button type="button" class="btn btn-light">Select</button>
+                                    <p id="2preferenceInterval" class="date">Update interval 15 min</p>
+                                    <button id="2preferenceSelect" type="button" class="btn btn-light">Select</button>
                                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">Edit</button>
                                 </div>
                             </div>

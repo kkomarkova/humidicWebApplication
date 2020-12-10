@@ -7,15 +7,20 @@ let humidityReportList = new HumidityReportList();
 let weatherReport = new WeatherReport();
 let userPreferences = new UserPreferences();
 
+//() => syntax because I want "this." inside the method to refer to the class, not the button
 let settingsLocationButton:HTMLElement = document.getElementById("settingsLocationButton");
 settingsLocationButton.addEventListener('click', () => weatherReport.ChangeLocation());
-//let settingsPreferenceCard = <HTMLDivElement>document.getElementById("settingsPreferenceCard");
-//settingsPreferenceCard.addEventListener('click', () => console.log("clicky"));
 
-//console.log(weatherReport.GetWeatherData());
-//weatherReport.GetWeatherData();
-//humidityReportList.GetAllReports();
-//userPreferences.ShowPreferences();
+//Not using the () => syntax here because I do want the "this." inside the method to refer to the button
+let settingsSelectPreference0Button:HTMLElement = document.getElementById("0preferenceSelect");
+settingsSelectPreference0Button.addEventListener('click', userPreferences.SelectNewPreference);
+let settingsSelectPreference1Button:HTMLElement = document.getElementById("1preferenceSelect");
+settingsSelectPreference1Button.addEventListener('click', userPreferences.SelectNewPreference);
+let settingsSelectPreference2Button:HTMLElement = document.getElementById("2preferenceSelect");
+settingsSelectPreference2Button.addEventListener('click', userPreferences.SelectNewPreference);
+
+userPreferences.ShowPreferences();
+UserPreferences.LoadSelectedPreference();
 
 (async () => {
     await humidityReportList.GetAllReports(); 
@@ -27,7 +32,6 @@ settingsLocationButton.addEventListener('click', () => weatherReport.ChangeLocat
         let currentMinute:number = new Date().getMinutes();
         if(currentMinute % 5 == 0){
             humidityReportList.GetAllReports();
-            //humidityReportList.FindLatestReport();
             humidityReportList.UpdateMainPageHumidity();
         }
 
