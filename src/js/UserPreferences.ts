@@ -61,11 +61,16 @@ export class UserPreferences{
     }
 
     public SelectNewPreference(){
-        //This works, don't let visual studio code fool you
+        //This works, don't let visual studio code fool you. It thinks "this" refers to the class
+        //but when you run it in the browser, this actually refers to the button
         let pressedButton:HTMLElement = this;
         let pressedButtonID:string = pressedButton.getAttribute("id").toString()[0];
         UserPreferences.SelectedPreference = UserPreferences.UserPreferences[parseInt(pressedButtonID)];
 
         UserPreferences.LoadSelectedPreference();
+    }
+
+    public EditPreference(){
+        
     }
 }
