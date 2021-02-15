@@ -1,4 +1,4 @@
-# What is Humidic Web app ?
+## About Humidic
 Breathing in humid air activates the nerves in the lungs, that narrow and tighten the
 airways. Humidity also makes the air stagnant enough to trap pollutants and allergens like
 pollen, dust, mold, dust mites, and smoke. These can set off the asthma symptoms such as
@@ -14,3 +14,6 @@ The idea of the web application is to have a device that is installed in the ast
 room, that checks the humidity level in the room. The patient can set an alert if they want,
 so they will be notified when the humidity level is higher or lower that values they have
 defined. The webpage will also display the temperature and humidity outside.
+
+## The Humidic design
+![Home](https://user-images.githubusercontent.com/58290791/107936886-7b99ad80-6f83-11eb-9f60-a7ada0f7b8f6.png)
