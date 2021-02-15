@@ -1,4 +1,4 @@
-# Introduction 
+# What is Humidic Web app ?
 Breathing in humid air activates the nerves in the lungs, that narrow and tighten the
 airways. Humidity also makes the air stagnant enough to trap pollutants and allergens like
 pollen, dust, mold, dust mites, and smoke. These can set off the asthma symptoms such as
